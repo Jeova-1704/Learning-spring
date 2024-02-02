@@ -1,6 +1,7 @@
 package br.com.jeova.cursoSpring.services;
 
 import br.com.jeova.cursoSpring.data.vo.v1.PersonVO;
+import br.com.jeova.cursoSpring.exceptions.RequiredObjectIsNullException;
 import br.com.jeova.cursoSpring.model.Person;
 import br.com.jeova.cursoSpring.repository.PersonRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -80,6 +81,30 @@ class PersonServiceTest {
         assertEquals("First Name Test1", result.getFirstName());
         assertEquals("Last Name Test1", result.getLastName());
         assertEquals("Female", result.getGender());
+    }
+
+    @Test
+    void createWithNullPerson() {
+        Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> {
+            service.create(null);
+        });
+
+        String expectedMsg = "It is not allowed to persist a null object";
+        String actualMsg = exception.getMessage();
+
+        assertTrue(actualMsg.contains(expectedMsg));
+    }
+
+    @Test
+    void updateWithNullPerson() {
+        Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> {
+            service.update(null);
+        });
+
+        String expectedMsg = "It is not allowed to persist a null object";
+        String actualMsg = exception.getMessage();
+
+        assertTrue(actualMsg.contains(expectedMsg));
     }
 
     @Test
