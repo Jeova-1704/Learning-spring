@@ -1,4 +1,4 @@
-package br.com.jeova.cursoSpring.data.vo.v1;
+package br.com.jeova.cursoSpring.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -9,8 +9,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-@JsonPropertyOrder({"id", "firstName", "lastName", "address", "x "})
-public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
+@JsonPropertyOrder({"id", "firstName", "lastName", "address", "gender"})
+public class PersonDTO extends RepresentationModel<PersonDTO> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -23,7 +23,7 @@ public class PersonVO extends RepresentationModel<PersonVO> implements Serializa
     private String address;
     private String gender;
 
-    public PersonVO() {}
+    public PersonDTO() {}
 
     public Long getKey() {
         return key;
@@ -69,7 +69,7 @@ public class PersonVO extends RepresentationModel<PersonVO> implements Serializa
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersonVO personVO = (PersonVO) o;
+        PersonDTO personVO = (PersonDTO) o;
         return Objects.equals(key, personVO.key) && Objects.equals(firstName, personVO.firstName) && Objects.equals(lastName, personVO.lastName) && Objects.equals(address, personVO.address) && Objects.equals(gender, personVO.gender);
     }
 

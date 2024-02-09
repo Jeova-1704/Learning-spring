@@ -1,7 +1,7 @@
 package br.com.jeova.cursoSpring.services;
 
 import br.com.jeova.cursoSpring.controllers.PersonController;
-import br.com.jeova.cursoSpring.data.vo.v1.PersonVO;
+import br.com.jeova.cursoSpring.DTO.PersonDTO;
 import br.com.jeova.cursoSpring.exceptions.RequiredObjectIsNullException;
 import br.com.jeova.cursoSpring.exceptions.ResourceNotFoundException;
 import br.com.jeova.cursoSpring.mapper.DozerMapper;
@@ -21,27 +21,27 @@ public class PersonService {
     @Autowired
     private PersonRepository repository;
 
-    private Logger logger = Logger.getLogger(PersonService.class.getName());
+    private final Logger logger = Logger.getLogger(PersonService.class.getName());
 
 
-    public List<PersonVO> findALl() {
+    public List<PersonDTO> findALl() {
         logger.info("Finding all people");
-        List<PersonVO> persons =  DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);
+        List<PersonDTO> persons =  DozerMapper.parseListObjects(repository.findAll(), PersonDTO.class);
         persons
                 .stream()
                 .forEach(p -> p.add(linkTo(methodOn(PersonController.class).findById(p.getKey())).withSelfRel()));
         return persons;
     }
 
-    public PersonVO findById(Long id) {
+    public PersonDTO findById(Long id) {
         logger.info("Finding one person");
         Person entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
-        PersonVO vo = DozerMapper.parseObject(entity, PersonVO.class);
+        PersonDTO vo = DozerMapper.parseObject(entity, PersonDTO.class);
         vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
         return vo;
     }
 
-    public PersonVO create(PersonVO personVO) {
+    public PersonDTO create(PersonDTO personVO) {
 
         if (personVO == null) {
             throw new RequiredObjectIsNullException();
@@ -49,12 +49,12 @@ public class PersonService {
 
         logger.info("Creating one person");
         Person person = DozerMapper.parseObject(personVO, Person.class);
-        PersonVO vo = DozerMapper.parseObject(repository.save(person), PersonVO.class);
+        PersonDTO vo = DozerMapper.parseObject(repository.save(person), PersonDTO.class);
         vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
         return vo;
     }
 
-    public PersonVO update(PersonVO personVO) {
+    public PersonDTO update(PersonDTO personVO) {
 
         if (personVO == null) {
             throw new RequiredObjectIsNullException();
@@ -68,7 +68,7 @@ public class PersonService {
         person.setAddress(personVO.getAddress());
         person.setGender(personVO.getGender());
 
-        PersonVO vo = DozerMapper.parseObject(repository.save(person), PersonVO.class);
+        PersonDTO vo = DozerMapper.parseObject(repository.save(person), PersonDTO.class);
         vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
         return vo;
     }

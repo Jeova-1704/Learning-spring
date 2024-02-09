@@ -1,6 +1,6 @@
 package br.com.jeova.cursoSpring.services;
 
-import br.com.jeova.cursoSpring.data.vo.v1.PersonVO;
+import br.com.jeova.cursoSpring.DTO.PersonDTO;
 import br.com.jeova.cursoSpring.exceptions.RequiredObjectIsNullException;
 import br.com.jeova.cursoSpring.model.Person;
 import br.com.jeova.cursoSpring.repository.PersonRepository;
@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import unittestes.mapper.mocks.MockPerson;
 
 import java.util.List;
@@ -106,7 +105,7 @@ class PersonServiceTest {
         Person persisted = entity;
         persisted.setId(1L);
 
-        PersonVO vo = input.mockVO(1);
+        PersonDTO vo = input.mockVO(1);
         vo.setKey(1L);
 
         when(personRepository.save(entity)).thenReturn(persisted);
@@ -154,7 +153,7 @@ class PersonServiceTest {
         Person persisted = entity;
         persisted.setId(1L);
 
-        PersonVO vo = input.mockVO(1);
+        PersonDTO vo = input.mockVO(1);
         vo.setKey(1L);
 
         when(personRepository.findById(1L)).thenReturn(Optional.of(entity));

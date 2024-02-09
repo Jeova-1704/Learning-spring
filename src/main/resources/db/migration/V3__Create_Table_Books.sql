@@ -1,8 +1,7 @@
-CREATE TABLE IF NOT EXISTS public.person (
-    id bigserial NOT NULL,
-    first_name character varying(80) COLLATE pg_catalog."default" NOT NULL,
-    last_name character varying(80) COLLATE pg_catalog."default" NOT NULL,
-    address character varying(100) COLLATE pg_catalog."default" NOT NULL,
-    gender character varying(6) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT person_pkey PRIMARY KEY (id)
-    );
+CREATE TABLE IF NOT EXISTS books (
+    id SERIAL PRIMARY KEY,
+    author TEXT,
+    launch_date TIMESTAMP(6) NOT NULL,
+    price DECIMAL(62, 2) NOT NULL,
+    title TEXT
+);
