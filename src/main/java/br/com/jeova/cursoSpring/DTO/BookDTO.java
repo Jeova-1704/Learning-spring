@@ -18,7 +18,7 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
 
     @Mapping("id")
     @JsonProperty("id")
-    private Integer key;
+    private Long key;
     private String author;
     private Date launch_date;
     private Double price;
@@ -26,11 +26,11 @@ public class BookDTO extends RepresentationModel<BookDTO> implements Serializabl
 
     public BookDTO(){}
 
-    public Integer getKey() {
+    public Long getKey() {
         return key;
     }
 
-    public void setKey(Integer key) {
+    public void setKey(Long key) {
         this.key = key;
     }
 

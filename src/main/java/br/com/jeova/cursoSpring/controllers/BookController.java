@@ -36,7 +36,7 @@ public class BookController {
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
             @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),})
-    public BookDTO findByid(@PathVariable(value = "id") Integer id) {
+    public BookDTO findByid(@PathVariable(value = "id") Long id) {
         return service.findById(id);
     }
 
@@ -85,7 +85,7 @@ public class BookController {
             @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
             @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
             @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content),})
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) {
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

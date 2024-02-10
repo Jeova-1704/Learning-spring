@@ -32,7 +32,7 @@ public class BookService {
         return books;
     }
 
-    public BookDTO findById(Integer id){
+    public BookDTO findById(Long id){
         logger.info("finding one book");
         Book book = Repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
         BookDTO entityDTO = DozerMapper.parseObject(book, BookDTO.class);
@@ -73,7 +73,7 @@ public class BookService {
         return entityDTO;
     }
 
-    public void delete(Integer id){
+    public void delete(Long id){
         logger.info("Deleting one book");
         Book book = Repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No Records foun for this Id!"));
         Repository.delete(book);
